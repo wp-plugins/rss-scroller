@@ -4,9 +4,11 @@
 Plugin Name: RSS scroller.
 Description: This plug-in will display RSS feed with simple scroller or ticker. It gradually reveals each item into view from left to right.
 Author: Gopi.R
-Version: 5.0
+Version: 5.1
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 function rss_scr_show()
@@ -70,30 +72,35 @@ function rss_scr_show()
 <?php
 }
 
+add_shortcode( 'rss-scroller', 'rss_scr_shortcode' );
 
-add_filter('the_content','rss_scr_show_filter');
-
-function rss_scr_show_filter($content)
-{
-	return 	preg_replace_callback('/\[RSS-SCROLLER:(.*?)\]/sim','rss_scr_show_filter_callback',$content);
-}
-
-function rss_scr_show_filter_callback($matches) 
+function rss_scr_shortcode( $atts ) 
 {
 	global $wpdb;
 	//[RSS-SCROLLER:TYPE=widget]
-	
+	//$scode = $matches[1];
 	//include_once(ABSPATH.WPINC.'/rss.php');
 	
-	$scode = $matches[1];
+	//[rss-scroller url="url1" width="200" height="60" delay="3000" speed="5"]
+	if ( ! is_array( $atts ) )
+	{
+		return '';
+	}
+	$url = $atts['url'];
+	$width = $atts['width'];
+	$height = $atts['height'];
+	$delay = $atts['delay'];
+	$speed = $atts['speed'];
 	
-	$rss_scr_width = get_option('rss_scr_width');
-	$rss_scr_height = get_option('rss_scr_height');
-	$rss_scr_delay = get_option('rss_scr_delay');
-	$rss_scr_speed = get_option('rss_scr_speed');
 	$siteurl = get_option('siteurl');
 	$rss_scr_num = get_option('rss_scr_num');
+	
 	$rss_scr_url = get_option('rss_scr_url');
+	
+	if( $url == "url1" ){ $rss_scr_url = get_option('rss_scr_url'); }
+	elseif( $url == "url2" ){ $rss_scr_url = get_option('rss_scr_url2'); }
+	elseif( $url == "url3" ){ $rss_scr_url = get_option('rss_scr_url3'); }
+	else { $rss_scr_url = get_option('rss_scr_url');  }
 	
 	if(!is_numeric($rss_scr_delay)){ $rss_scr_delay = 3000;} 
 	if(!is_numeric($rss_scr_speed)){ $rss_scr_speed = 5;} 
@@ -154,6 +161,8 @@ function rss_scr_install() {
 	$rss2_url = get_option('home'). "/?feed=rss2";
 	//add_option('rss_scr_url', $rss2_url);
 	add_option('rss_scr_url', 'http://www.gopiplus.com/work/category/word-press-plug-in/feed/');
+	add_option('rss_scr_url2', 'http://www.gopiplus.com/work/category/word-press-plug-in/feed/');
+	add_option('rss_scr_url3', 'http://www.gopiplus.com/work/category/word-press-plug-in/feed/');
 }
 
 function rss_scr_widget($args) {
@@ -180,6 +189,8 @@ function rss_scr_admin() {
 	$rss_scr_speed = get_option('rss_scr_speed');
 	$rss_scr_num = get_option('rss_scr_num');
 	$rss_scr_url = get_option('rss_scr_url');
+	$rss_scr_url2 = get_option('rss_scr_url2');
+	$rss_scr_url3 = get_option('rss_scr_url3');
 	
 	if (@$_POST['rss_scr_submit']) 
 	{	
@@ -190,6 +201,8 @@ function rss_scr_admin() {
 		$rss_scr_speed = stripslashes($_POST['rss_scr_speed']);
 		$rss_scr_num = stripslashes($_POST['rss_scr_num']);
 		$rss_scr_url = stripslashes($_POST['rss_scr_url']);
+		$rss_scr_url2 = stripslashes($_POST['rss_scr_url2']);
+		$rss_scr_url3 = stripslashes($_POST['rss_scr_url3']);
 		
 		update_option('rss_scr_title', $rss_scr_title );
 		update_option('rss_scr_width', $rss_scr_width );
@@ -198,6 +211,8 @@ function rss_scr_admin() {
 		update_option('rss_scr_speed', $rss_scr_speed );
 		update_option('rss_scr_num', $rss_scr_num );
 		update_option('rss_scr_url', $rss_scr_url );
+		update_option('rss_scr_url2', $rss_scr_url2 );
+		update_option('rss_scr_url3', $rss_scr_url3 );
 	}
 	
 ?>
@@ -248,11 +263,25 @@ function rss_scr_admin() {
           only number </td>
       </tr>
       <tr>
-        <td align="left" valign="bottom">RSS URL: </td>
+        <td align="left" valign="bottom">RSS URL 1: </td>
         <td align="center" valign="top">&nbsp;</td>
       </tr>
       <tr>
         <td colspan="2" align="left" valign="bottom"><input name="rss_scr_url" type="text" value="<?php echo $rss_scr_url; ?>"  id="rss_scr_url" size="120" /></td>
+      </tr>
+	  <tr>
+        <td align="left" valign="bottom">RSS URL 2: </td>
+        <td align="center" valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="left" valign="bottom"><input name="rss_scr_url2" type="text" value="<?php echo $rss_scr_url2; ?>"  id="rss_scr_url2" size="120" /></td>
+      </tr>
+	  <tr>
+        <td align="left" valign="bottom">RSS URL 3: </td>
+        <td align="center" valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="left" valign="bottom"><input name="rss_scr_url3" type="text" value="<?php echo $rss_scr_url3; ?>"  id="rss_scr_url3" size="120" /></td>
       </tr>
       <tr>
         <td height="40" align="left" valign="bottom"><input name="rss_scr_submit" id="rss_scr_submit" lang="publish" class="button-primary" value="Update Setting" type="submit" /></td>
@@ -267,7 +296,7 @@ function rss_scr_admin() {
     <li>Add the gallery in the posts and pages</li>
     <li>Add directly in the theme</li>
     </ol>
-	Note: Check official website for more info <a target="_blank" href='http://www.gopiplus.com/work/2010/07/18/rss-scroller/'>click here</a>.<br>
+	Note: Check official website for more information <a target="_blank" href='http://www.gopiplus.com/work/2010/07/18/rss-scroller/'>click here</a>.<br>
 </div>
 <?php
 }

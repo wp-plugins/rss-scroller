@@ -5,8 +5,10 @@ Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Tags: horizontal, scrolling, rss
 Requires at least: 3.0
-Tested up to: 3.4.1
-Stable tag: 5.0
+Tested up to: 3.5
+Stable tag: 5.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
 This plug-in will display RSS feed with simple scroller or ticker. It gradually reveals each item into view from left to right.
 
@@ -27,9 +29,7 @@ Want to display the RSS feed with scroller then use this RSS scroller wordpress 
 *   Wonderful scroller effect.
 *   Linkable scroll.
 
-
 Check official website for live demo [http://www.gopiplus.com/work/2010/07/18/rss-scroller/](http://www.gopiplus.com/work/2010/07/18/rss-scroller/)
-
 
 == Installation ==
 
@@ -55,13 +55,18 @@ Check official website for live demo [http://www.gopiplus.com/work/2010/07/18/rs
 
 == Upgrade Notice ==
 
+= 5.1 =	 
+
+Tested up to 3.5
+Slight change in the short code, Please find the new short code for your scroll
+
 = 5.0 =
 
 New demo link, www.gopiplus.com
 
 = 4.0 =	 
 
-Tested upto 3.4
+Tested up to 3.4
 
 = 3.0 =	  
 
@@ -69,7 +74,7 @@ Only admin can see the plugin setting.
 
 = 2.0 =	 
 
-Tested upto 3.0
+Tested up to 3.0
 
 = 1.0 = 	 
 
@@ -77,13 +82,18 @@ First version
 
 == Changelog ==
 
+= 5.1 =	 
+
+Tested up to 3.5
+Slight change in the short code, Please find the new short code for your scroll.
+
 = 5.0 =
 
 New demo link, www.gopiplus.com
 
 = 4.0 =	 
 
-Tested upto 3.4
+Tested up to 3.4
 
 = 3.0 =	  
 
@@ -91,7 +101,7 @@ Only admin can see the plugin setting.
 
 = 2.0 =	 
 
-Tested upto 3.0
+Tested up to 3.0
 
 = 1.0 = 	 
 
