@@ -1,10 +1,10 @@
 <?php
 
 /*
-Plugin Name: RSS scroller.
+Plugin Name: RSS scroller
 Description: This plug-in will display RSS feed with simple scroller or ticker. It gradually reveals each item into view from left to right.
 Author: Gopi.R
-Version: 5.1
+Version: 6.0
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 License: GPLv2 or later
@@ -151,21 +151,21 @@ function rss_scr_shortcode( $atts )
 	return $rss_scr;
 }
 
-function rss_scr_install() {
+function rss_scr_install() 
+{
 	add_option('rss_scr_title', "rss scroller");
 	add_option('rss_scr_width', '175');
 	add_option('rss_scr_height', '60');
 	add_option('rss_scr_delay', '5000');
 	add_option('rss_scr_speed', '5');
 	add_option('rss_scr_num', '10');
-	$rss2_url = get_option('home'). "/?feed=rss2";
-	//add_option('rss_scr_url', $rss2_url);
 	add_option('rss_scr_url', 'http://www.gopiplus.com/work/category/word-press-plug-in/feed/');
 	add_option('rss_scr_url2', 'http://www.gopiplus.com/work/category/word-press-plug-in/feed/');
 	add_option('rss_scr_url3', 'http://www.gopiplus.com/work/category/word-press-plug-in/feed/');
 }
 
-function rss_scr_widget($args) {
+function rss_scr_widget($args) 
+{
 	extract($args);
 	echo $before_widget . $before_title;
 	echo get_option('rss_scr_title');
@@ -177,128 +177,117 @@ function rss_scr_widget($args) {
 function rss_scr_control() 
 {
 	echo '<p>To change the setting goto RSS Scroller link under setting menu.';
-	echo '<br><a href="options-general.php?page=rss-scroller/rss-scroller.php">';
+	echo '<br><a href="options-general.php?page=rss-scroller">';
 	echo 'click here</a></p>';
 }
 
-function rss_scr_admin() {
-	$rss_scr_title = get_option('rss_scr_title');
-	$rss_scr_width = get_option('rss_scr_width');
-	$rss_scr_height = get_option('rss_scr_height');
-	$rss_scr_delay = get_option('rss_scr_delay');
-	$rss_scr_speed = get_option('rss_scr_speed');
-	$rss_scr_num = get_option('rss_scr_num');
-	$rss_scr_url = get_option('rss_scr_url');
-	$rss_scr_url2 = get_option('rss_scr_url2');
-	$rss_scr_url3 = get_option('rss_scr_url3');
-	
-	if (@$_POST['rss_scr_submit']) 
-	{	
-		$rss_scr_title = stripslashes($_POST['rss_scr_title']);
-		$rss_scr_width = stripslashes($_POST['rss_scr_width']);
-		$rss_scr_height = stripslashes($_POST['rss_scr_height']);
-		$rss_scr_delay = stripslashes($_POST['rss_scr_delay']);
-		$rss_scr_speed = stripslashes($_POST['rss_scr_speed']);
-		$rss_scr_num = stripslashes($_POST['rss_scr_num']);
-		$rss_scr_url = stripslashes($_POST['rss_scr_url']);
-		$rss_scr_url2 = stripslashes($_POST['rss_scr_url2']);
-		$rss_scr_url3 = stripslashes($_POST['rss_scr_url3']);
+function rss_scr_admin() 
+{
+	?>
+	<div class="wrap">
+	  <div class="form-wrap">
+		<div id="icon-edit" class="icon32 icon32-posts-post"><br>
+		</div>
+		<h2>RSS scroller</h2>	
+		<?php
+		$rss_scr_title = get_option('rss_scr_title');
+		$rss_scr_width = get_option('rss_scr_width');
+		$rss_scr_height = get_option('rss_scr_height');
+		$rss_scr_delay = get_option('rss_scr_delay');
+		$rss_scr_speed = get_option('rss_scr_speed');
+		$rss_scr_num = get_option('rss_scr_num');
+		$rss_scr_url = get_option('rss_scr_url');
+		$rss_scr_url2 = get_option('rss_scr_url2');
+		$rss_scr_url3 = get_option('rss_scr_url3');
+			
+		if (isset($_POST['rss_scr_form_submit']) && $_POST['rss_scr_form_submit'] == 'yes')
+		{
+			//	Just security thingy that wordpress offers us
+			check_admin_referer('rss_scr_form_setting');
 		
-		update_option('rss_scr_title', $rss_scr_title );
-		update_option('rss_scr_width', $rss_scr_width );
-		update_option('rss_scr_height', $rss_scr_height );
-		update_option('rss_scr_delay', $rss_scr_delay );
-		update_option('rss_scr_speed', $rss_scr_speed );
-		update_option('rss_scr_num', $rss_scr_num );
-		update_option('rss_scr_url', $rss_scr_url );
-		update_option('rss_scr_url2', $rss_scr_url2 );
-		update_option('rss_scr_url3', $rss_scr_url3 );
-	}
-	
-?>
-<div class="wrap">
-  <h2>RSS scroller</h2>
-  <form name="form_mt" method="post" action="">
-    <table width="800" border="0" cellspacing="0" cellpadding="3">
-      <tr>
-        <td colspan="2" align="left" valign="bottom">Title: </td>
-      </tr>
-      <tr>
-        <td colspan="2" align="left" valign="bottom"><input name="rss_scr_title" type="text" value="<?php echo $rss_scr_title; ?>"  id="rss_scr_title" size="120" maxlength="100"></td>
-      </tr>
-      <tr align="left" valign="middle">
-        <td width="314" valign="bottom">Scroller Speed:</td>
-        <td width="474" height="230" rowspan="10" align="center" valign="middle"></td>     
-      </tr>
-      <tr align="left" valign="middle">
-        <td valign="bottom"><input name="rss_scr_speed" type="text" value="<?php echo $rss_scr_speed; ?>"  id="rss_scr_speed" maxlength="5" />
-          only number </td>
-      </tr>
-      <tr align="left" valign="middle">
-        <td valign="bottom">Scroller Delay:</td>
-      </tr>
-      <tr align="left" valign="middle">
-        <td valign="middle"><input name="rss_scr_delay" type="text" value="<?php echo $rss_scr_delay; ?>"  id="rss_scr_delay" maxlength="5" />
-          only number </td>
-      </tr>
-      <tr align="left" valign="middle">
-        <td valign="middle">Width:</td>
-      </tr>
-      <tr>
-        <td align="left" valign="middle"><input name="rss_scr_width" type="text" value="<?php echo $rss_scr_width; ?>"  id="rss_scr_width" maxlength="5" />
-          only number </td>
-      </tr>
-      <tr align="left" valign="middle">
-        <td valign="middle">Height:</td>
-      </tr>
-      <tr align="left" valign="middle">
-        <td valign="middle"><input name="rss_scr_height" type="text" value="<?php echo $rss_scr_height; ?>"  id="rss_scr_height" maxlength="5">
-          only number </td>
-      </tr>
-      <tr>
-        <td align="left" valign="middle">No of Items:</td>
-      </tr>
-      <tr>
-        <td align="left" valign="middle"><input name="rss_scr_num" type="text" value="<?php echo $rss_scr_num; ?>"  id="rss_scr_num" maxlength="3" />
-          only number </td>
-      </tr>
-      <tr>
-        <td align="left" valign="bottom">RSS URL 1: </td>
-        <td align="center" valign="top">&nbsp;</td>
-      </tr>
-      <tr>
-        <td colspan="2" align="left" valign="bottom"><input name="rss_scr_url" type="text" value="<?php echo $rss_scr_url; ?>"  id="rss_scr_url" size="120" /></td>
-      </tr>
-	  <tr>
-        <td align="left" valign="bottom">RSS URL 2: </td>
-        <td align="center" valign="top">&nbsp;</td>
-      </tr>
-      <tr>
-        <td colspan="2" align="left" valign="bottom"><input name="rss_scr_url2" type="text" value="<?php echo $rss_scr_url2; ?>"  id="rss_scr_url2" size="120" /></td>
-      </tr>
-	  <tr>
-        <td align="left" valign="bottom">RSS URL 3: </td>
-        <td align="center" valign="top">&nbsp;</td>
-      </tr>
-      <tr>
-        <td colspan="2" align="left" valign="bottom"><input name="rss_scr_url3" type="text" value="<?php echo $rss_scr_url3; ?>"  id="rss_scr_url3" size="120" /></td>
-      </tr>
-      <tr>
-        <td height="40" align="left" valign="bottom"><input name="rss_scr_submit" id="rss_scr_submit" lang="publish" class="button-primary" value="Update Setting" type="submit" /></td>
-        <td align="center" valign="top">&nbsp;</td>
-      </tr>
-    </table>
-  </form>
-  <br>
-  <h2>Plugin configuration</h2>
-	<ol>
-    <li>Drag and drop the widget</li>
-    <li>Add the gallery in the posts and pages</li>
-    <li>Add directly in the theme</li>
-    </ol>
-	Note: Check official website for more information <a target="_blank" href='http://www.gopiplus.com/work/2010/07/18/rss-scroller/'>click here</a>.<br>
-</div>
-<?php
+			$rss_scr_title = stripslashes($_POST['rss_scr_title']);
+			$rss_scr_width = stripslashes($_POST['rss_scr_width']);
+			$rss_scr_height = stripslashes($_POST['rss_scr_height']);
+			$rss_scr_delay = stripslashes($_POST['rss_scr_delay']);
+			$rss_scr_speed = stripslashes($_POST['rss_scr_speed']);
+			$rss_scr_num = stripslashes($_POST['rss_scr_num']);
+			$rss_scr_url = stripslashes($_POST['rss_scr_url']);
+			$rss_scr_url2 = stripslashes($_POST['rss_scr_url2']);
+			$rss_scr_url3 = stripslashes($_POST['rss_scr_url3']);
+			
+			update_option('rss_scr_title', $rss_scr_title );
+			update_option('rss_scr_width', $rss_scr_width );
+			update_option('rss_scr_height', $rss_scr_height );
+			update_option('rss_scr_delay', $rss_scr_delay );
+			update_option('rss_scr_speed', $rss_scr_speed );
+			update_option('rss_scr_num', $rss_scr_num );
+			update_option('rss_scr_url', $rss_scr_url );
+			update_option('rss_scr_url2', $rss_scr_url2 );
+			update_option('rss_scr_url3', $rss_scr_url3 );
+			
+			?>
+			<div class="updated fade">
+				<p><strong>Details successfully updated.</strong></p>
+			</div>
+			<?php
+		}
+		?>
+		<form name="rss_scr_form" method="post" action="">
+			<h3>Plugin management</h3>
+			
+			<label for="tag-width">Title (For widget)</label>
+			<input name="rss_scr_title" type="text" value="<?php echo $rss_scr_title; ?>"  id="rss_scr_title" size="50" maxlength="100">
+			<p>Please enter your widget title.</p>
+			
+			<label for="tag-width">Scroller speed</label>
+			<input name="rss_scr_speed" type="text" value="<?php echo $rss_scr_speed; ?>"  id="rss_scr_speed" maxlength="5" />
+			<p>Please enter your scroller speed, this option only for widget. (Example: 5)</p>
+			
+			<label for="tag-width">Scroller delay</label>
+			<input name="rss_scr_delay" type="text" value="<?php echo $rss_scr_delay; ?>"  id="rss_scr_delay" maxlength="5" />
+			<p>Please enter your scroller delay, this option only for widget. (Example: 5000)</p>
+			
+			<label for="tag-width">Width</label>
+			<input name="rss_scr_width" type="text" value="<?php echo $rss_scr_width; ?>"  id="rss_scr_width" maxlength="5" />
+			<p>Please enter your width, this option only for widget. (Example: 300)</p>
+			
+			<label for="tag-width">Height</label>
+			<input name="rss_scr_height" type="text" value="<?php echo $rss_scr_height; ?>"  id="rss_scr_height" maxlength="5">
+			<p>Please enter your height, this option only for widget. (Example: 200)</p>
+			
+			<label for="tag-width">No of items to display</label>
+			<input name="rss_scr_num" type="text" value="<?php echo $rss_scr_num; ?>"  id="rss_scr_num" maxlength="3" />
+			<p>Please enter number of items to display from rss feed. (Example: 10)</p>
+			
+			<label for="tag-width">RSS URL 1 (This rss link is default for widget).</label>
+			<input name="rss_scr_url" type="text" value="<?php echo $rss_scr_url; ?>"  id="rss_scr_url" size="120" />
+			<p>Please enter your rss link (url1).</p>
+			
+			<label for="tag-width">RSS URL 2</label>
+			<input name="rss_scr_url2" type="text" value="<?php echo $rss_scr_url2; ?>"  id="rss_scr_url2" size="120" />
+			<p>Please enter your rss link (url2).</p>
+			
+			<label for="tag-width">RSS URL 3</label>
+			<input name="rss_scr_url3" type="text" value="<?php echo $rss_scr_url3; ?>"  id="rss_scr_url3" size="120" />
+			<p>Please enter your rss link (url3).</p>
+			
+			<input type="hidden" name="rss_scr_form_submit" value="yes"/>
+			<p class="submit">
+			<input name="hsa_submit" id="hsa_submit" class="button" value="Submit" type="submit" />
+			<a class="button" target="_blank" href="http://www.gopiplus.com/work/2010/07/18/rss-scroller/">Help</a>
+			</p>
+			<?php wp_nonce_field('rss_scr_form_setting'); ?>
+		</form>
+		</div>
+		<h3>Plugin configuration option</h3>
+		<ol>
+			<li>Add the plugin in the posts or pages using short code.</li>
+			<li>Add directly in to the theme using PHP code.</li>
+			<li>Drag and drop the widget to your sidebar.</li>
+		</ol>
+	  <p class="description">Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2010/07/18/rss-scroller/">click here</a></p>
+	</div>
+	<?php
 }
 
 function rss_scr_widget_init() 
@@ -315,18 +304,12 @@ function rss_scr_widget_init()
 
 function rss_scr_deactivation() 
 {
-	//delete_option('rss_scr_title');
-//	delete_option('rss_scr_width');
-//	delete_option('rss_scr_height');
-//	delete_option('rss_scr_delay');
-//	delete_option('rss_scr_speed');
-//	delete_option('rss_scr_num');
-//	delete_option('rss_scr_url');
+	// No action required.
 }
 
 function rss_scr_add_to_menu() 
 {
-	add_options_page('RSS scroller', 'RSS scroller', 'manage_options', __FILE__, 'rss_scr_admin' );
+	add_options_page('RSS scroller', 'RSS scroller', 'manage_options', 'rss-scroller', 'rss_scr_admin' );
 }
 
 if (is_admin()) 
