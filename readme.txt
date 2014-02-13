@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Tags: horizontal, scrolling, rss
 Requires at least: 3.4
-Tested up to: 3.6
-Stable tag: 6.0
+Tested up to: 3.8
+Stable tag: 6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -49,11 +49,17 @@ Check official website for live demo [http://www.gopiplus.com/work/2010/07/18/rs
 
 == Screenshots ==
 
-1. Admin page for setting.
+1. Front Screen. http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 
-2. Front End.
+2. Admin Screen. http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 
 == Upgrade Notice ==
+
+= 6.1 =	 
+
+1. Tested up to 3.8
+2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
+Plugin *.po file (rss-scroller.po) available in the languages folder.
 
 = 6.0 =	 
 
@@ -87,6 +93,12 @@ Tested up to 3.0
 First version
 
 == Changelog ==
+
+= 6.1 =	 
+
+1. Tested up to 3.8
+2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
+Plugin *.po file (rss-scroller.po) available in the languages folder.
 
 = 6.0 =	 
 
