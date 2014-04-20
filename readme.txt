@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Tags: horizontal, scrolling, rss
 Requires at least: 3.4
-Tested up to: 3.8
-Stable tag: 6.1
+Tested up to: 3.9
+Stable tag: 6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -55,6 +55,11 @@ Check official website for live demo [http://www.gopiplus.com/work/2010/07/18/rs
 
 == Upgrade Notice ==
 
+= 6.2 =	 
+
+1. Tested up to 3.9
+2. Now it using fetch_feed() wordpress method to load rss feed. (fetch_feed() uses the SimplePie and FeedCache functionality for retrieval and parsing and automatic caching)
+
 = 6.1 =	 
 
 1. Tested up to 3.8
@@ -93,6 +98,11 @@ Tested up to 3.0
 First version
 
 == Changelog ==
+
+= 6.2 =	 
+
+1. Tested up to 3.9
+2. Now it using fetch_feed() wordpress method to load rss feed. (fetch_feed() uses the SimplePie and FeedCache functionality for retrieval and parsing and automatic caching)
 
 = 6.1 =	 
 

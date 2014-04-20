@@ -2,8 +2,8 @@
 /*
 Plugin Name: RSS scroller
 Description: This plug-in will display RSS feed with simple scroller or ticker. It gradually reveals each item into view from left to right.
-Author: Gopi.R
-Version: 6.1
+Author: Gopi Ramasamy
+Version: 6.2
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 License: GPLv2 or later
@@ -44,26 +44,31 @@ function rss_scr_show()
 	}
 	
 	$cnt=0;
-	$xml = "";
+	$rss_scr = "";
 	$content = @file_get_contents($rss_scr_url);
 	if (strpos($http_response_header[0], "200")) 
 	{
-		$f = fopen( $rss_scr_url, 'r' );
-		while( $data = fread( $f, 4096 ) ) { $xml .= $data; }
-		fclose( $f );
-		preg_match_all( "/\<item\>(.*?)\<\/item\>/s", $xml, $itemblocks );
-		foreach( $itemblocks[1] as $block )
+		$maxitems = 0;
+		include_once( ABSPATH . WPINC . '/feed.php' );
+		$rss = fetch_feed( $rss_scr_url );
+		if ( ! is_wp_error( $rss ) )
 		{
-			if($cnt==$rss_scr_num)
+			$cnt = 0;
+			$maxitems = $rss->get_item_quantity( $rss_scr_num ); 
+			$rss_items = $rss->get_items( 0, $maxitems );
+			if ( $maxitems > 0 )
 			{
-				break;
+				foreach ( $rss_items as $item )
+				{
+					$link = $item->get_permalink();
+					$text = $item->get_title();
+					$content = '<a target="_blank" href="'.$link.'" title="'.esc_sql( $text ).'">'.esc_sql( $text ).'</a>';
+					$rss_scr = $rss_scr . "rss_scr_contents[$cnt]='$content';";
+					$cnt++;
+				}
 			}
-			preg_match_all( "/\<title\>(.*?)\<\/title\>/",  $block, $title );
-			preg_match_all( "/\<link\>(.*?)\<\/link\>/", $block, $link );
-			$content = '<a href="'.$link[1][0].'" title="'.mysql_real_escape_string( $title[1][0] ).'">'.mysql_real_escape_string( $title[1][0] ).'</a>';
-			$rss_scr = $rss_scr . "rss_scr_contents[$cnt]='$content';";
-			$cnt++;
 		}
+	
 		?>
 		<div style="padding-top:5px;"> <span id="rss_scr_spancontant" style="position:absolute;<?php echo $rss_scr_width.$rss_scr_height; ?>"></span> </div>
 		<script src="<?php echo $siteurl; ?>/wp-content/plugins/rss-scroller/rss-scroller.js" type="text/javascript"></script>
@@ -135,31 +140,35 @@ function rss_scr_shortcode( $atts )
 	$xml = "";
 	$rss = "";
 	$rss_scr = "";
+	$rss_contents = "";
 	$content = @file_get_contents($rss_scr_url);
 	if (strpos($http_response_header[0], "200")) 
 	{
-		$f = fopen( $rss_scr_url, 'r' );
-		while( $data = fread( $f, 4096 ) ) { $xml .= $data; }
-		fclose( $f );
-		preg_match_all( "/\<item\>(.*?)\<\/item\>/s", $xml, $itemblocks );
-		foreach( $itemblocks[1] as $block )
+		$maxitems = 0;
+		include_once( ABSPATH . WPINC . '/feed.php' );
+		$rss = fetch_feed( $rss_scr_url );
+		if ( ! is_wp_error( $rss ) )
 		{
-			if($cnt==$rss_scr_num)
+			$cnt = 0;
+			$maxitems = $rss->get_item_quantity( $rss_scr_num ); 
+			$rss_items = $rss->get_items( 0, $maxitems );
+			if ( $maxitems > 0 )
 			{
-				break;
+				foreach ( $rss_items as $item )
+				{
+					$link = $item->get_permalink();
+					$text = $item->get_title();
+					$content = '<a target="_blank" href="'.$link.'" title="'.esc_sql( $text ).'">'.esc_sql( $text ).'</a>';
+					$rss_contents = $rss_contents . "rss_scr_contents[$cnt]='$content';";
+					$cnt++;
+				}
 			}
-			preg_match_all( "/\<title\>(.*?)\<\/title\>/",  $block, $title );
-			preg_match_all( "/\<link\>(.*?)\<\/link\>/", $block, $link );
-			$content = '<a href="'.$link[1][0].'" title="'.mysql_real_escape_string( $title[1][0] ).'">'.mysql_real_escape_string( $title[1][0] ).'</a>';
-			$rss = $rss . " rss_scr_contents[$cnt]='".$content."'; ";
-			$cnt++;
 		}
-	
 		$rss_scr = $rss_scr .'<div style="padding-top:5px;"> <span id="rss_scr_spancontant" style="position:absolute;'.$rss_scr_width.$rss_scr_height.'"></span> </div>';
 		$rss_scr = $rss_scr .'<script src="'.$siteurl.'/wp-content/plugins/rss-scroller/rss-scroller.js" type="text/javascript"></script>';
 		$rss_scr = $rss_scr .'<script type="text/javascript">';
 		$rss_scr = $rss_scr .'var rss_scr_contents=new Array(); ';
-		$rss_scr = $rss_scr . $rss;
+		$rss_scr = $rss_scr . $rss_contents;
 		$rss_scr = $rss_scr .'var rss_scr_delay='.$rss_scr_delay.'; ';
 		$rss_scr = $rss_scr .'var rss_scr_speed='.$rss_scr_speed.'; '; 
 		$rss_scr = $rss_scr .'rss_scr_start();';
