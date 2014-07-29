@@ -3,7 +3,7 @@
 Plugin Name: RSS scroller
 Description: This plug-in will display RSS feed with simple scroller or ticker. It gradually reveals each item into view from left to right.
 Author: Gopi Ramasamy
-Version: 6.2
+Version: 6.3
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 License: GPLv2 or later
@@ -13,17 +13,17 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 function rss_scr_show()
 {
 	$rss_scr = "";
-	$rss_scr_width = get_option('rss_scr_width');
+	$rss_scr_width 	= get_option('rss_scr_width');
 	$rss_scr_height = get_option('rss_scr_height');
-	$rss_scr_delay = get_option('rss_scr_delay');
-	$rss_scr_speed = get_option('rss_scr_speed');
-	$siteurl = get_option('siteurl');
-	$rss_scr_num = get_option('rss_scr_num');
-	$rss_scr_url = get_option('rss_scr_url');
+	$rss_scr_delay 	= get_option('rss_scr_delay');
+	$rss_scr_speed 	= get_option('rss_scr_speed');
+	$siteurl 		= get_option('siteurl');
+	$rss_scr_num 	= get_option('rss_scr_num');
+	$rss_scr_url 	= get_option('rss_scr_url');
 	
 	if(!is_numeric($rss_scr_delay)){ $rss_scr_delay = 3000;} 
 	if(!is_numeric($rss_scr_speed)){ $rss_scr_speed = 5;} 
-	if(!is_numeric($rss_scr_num)){ $rss_scr_num = 5;} 
+	if(!is_numeric($rss_scr_num)){ $rss_scr_num 	= 5;} 
 	
 	if(!is_numeric($rss_scr_width))
 	{ 
@@ -45,9 +45,9 @@ function rss_scr_show()
 	
 	$cnt=0;
 	$rss_scr = "";
-	$content = @file_get_contents($rss_scr_url);
-	if (strpos($http_response_header[0], "200")) 
-	{
+	//$content = @file_get_contents($rss_scr_url);
+	//if (strpos($http_response_header[0], "200")) 
+	//{
 		$maxitems = 0;
 		include_once( ABSPATH . WPINC . '/feed.php' );
 		$rss = fetch_feed( $rss_scr_url );
@@ -66,25 +66,32 @@ function rss_scr_show()
 					$rss_scr = $rss_scr . "rss_scr_contents[$cnt]='$content';";
 					$cnt++;
 				}
+				?>
+				<div style="padding-top:5px;"> <span id="rss_scr_spancontant" style="position:absolute;<?php echo $rss_scr_width.$rss_scr_height; ?>"></span> </div>
+				<script src="<?php echo $siteurl; ?>/wp-content/plugins/rss-scroller/rss-scroller.js" type="text/javascript"></script>
+				<script type="text/javascript">
+					var rss_scr_contents=new Array()
+					<?php echo $rss_scr; ?>
+					var rss_scr_delay=<?php echo $rss_scr_delay; ?> 
+					var rss_scr_speed=<?php echo $rss_scr_speed; ?> 
+					rss_scr_start();
+					</script>
+				<?php
+			}
+			else
+			{
+				_e('Invalid or Broken rss link.', 'rss-scroller');
 			}
 		}
-	
-		?>
-		<div style="padding-top:5px;"> <span id="rss_scr_spancontant" style="position:absolute;<?php echo $rss_scr_width.$rss_scr_height; ?>"></span> </div>
-		<script src="<?php echo $siteurl; ?>/wp-content/plugins/rss-scroller/rss-scroller.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			var rss_scr_contents=new Array()
-			<?php echo $rss_scr; ?>
-			var rss_scr_delay=<?php echo $rss_scr_delay; ?> 
-			var rss_scr_speed=<?php echo $rss_scr_speed; ?> 
-			rss_scr_start();
-			</script>
-		<?php
-	}
-	else
-	{
-		_e('Invalid or Broken rss link.', 'rss-scroller');
-	}
+		else
+		{
+			_e('Invalid or Broken rss link.', 'rss-scroller');
+		}
+	//}
+	//else
+	//{
+	//	_e('Invalid or Broken rss link.', 'rss-scroller');
+	//}
 }
 
 add_shortcode( 'rss-scroller', 'rss_scr_shortcode' );
@@ -141,9 +148,9 @@ function rss_scr_shortcode( $atts )
 	$rss = "";
 	$rss_scr = "";
 	$rss_contents = "";
-	$content = @file_get_contents($rss_scr_url);
-	if (strpos($http_response_header[0], "200")) 
-	{
+	//$content = @file_get_contents($rss_scr_url);
+	//if (strpos($http_response_header[0], "200")) 
+	//{
 		$maxitems = 0;
 		include_once( ABSPATH . WPINC . '/feed.php' );
 		$rss = fetch_feed( $rss_scr_url );
@@ -162,22 +169,31 @@ function rss_scr_shortcode( $atts )
 					$rss_contents = $rss_contents . "rss_scr_contents[$cnt]='$content';";
 					$cnt++;
 				}
+				$rss_scr = $rss_scr .'<div style="padding-top:5px;"> <span id="rss_scr_spancontant" style="position:absolute;'.$rss_scr_width.$rss_scr_height.'"></span> </div>';
+				$rss_scr = $rss_scr .'<script src="'.$siteurl.'/wp-content/plugins/rss-scroller/rss-scroller.js" type="text/javascript"></script>';
+				$rss_scr = $rss_scr .'<script type="text/javascript">';
+				$rss_scr = $rss_scr .'var rss_scr_contents=new Array(); ';
+				$rss_scr = $rss_scr . $rss_contents;
+				$rss_scr = $rss_scr .'var rss_scr_delay='.$rss_scr_delay.'; ';
+				$rss_scr = $rss_scr .'var rss_scr_speed='.$rss_scr_speed.'; '; 
+				$rss_scr = $rss_scr .'rss_scr_start();';
+				$rss_scr = $rss_scr .'</script>';
+			}
+			else
+			{
+				$rss_scr = __('Invalid or Broken rss link.', 'rss-scroller');
 			}
 		}
-		$rss_scr = $rss_scr .'<div style="padding-top:5px;"> <span id="rss_scr_spancontant" style="position:absolute;'.$rss_scr_width.$rss_scr_height.'"></span> </div>';
-		$rss_scr = $rss_scr .'<script src="'.$siteurl.'/wp-content/plugins/rss-scroller/rss-scroller.js" type="text/javascript"></script>';
-		$rss_scr = $rss_scr .'<script type="text/javascript">';
-		$rss_scr = $rss_scr .'var rss_scr_contents=new Array(); ';
-		$rss_scr = $rss_scr . $rss_contents;
-		$rss_scr = $rss_scr .'var rss_scr_delay='.$rss_scr_delay.'; ';
-		$rss_scr = $rss_scr .'var rss_scr_speed='.$rss_scr_speed.'; '; 
-		$rss_scr = $rss_scr .'rss_scr_start();';
-		$rss_scr = $rss_scr .'</script>';
-	}
-	else
-	{
-		$rss_scr = __('Invalid or Broken rss link.', 'rss-scroller');
-	}
+		else
+		{
+			$rss_scr = __('Invalid or Broken rss link.', 'rss-scroller');
+		}
+
+	//}
+	//else
+	//{
+	//	$rss_scr = __('Invalid or Broken rss link.', 'rss-scroller');
+	//}
 	return $rss_scr;
 }
 
@@ -292,15 +308,15 @@ function rss_scr_admin()
 			<p><?php _e('Please enter number of items to display from rss feed.', 'rss-scroller'); ?> (Example: 10)</p>
 			
 			<label for="tag-width"><?php _e('RSS URL 1 (This rss link is default for widget).', 'rss-scroller'); ?></label>
-			<input name="rss_scr_url" type="text" value="<?php echo $rss_scr_url; ?>"  id="rss_scr_url" size="100" />
+			<input name="rss_scr_url" type="text" value="<?php echo $rss_scr_url; ?>"  id="rss_scr_url" size="90" />
 			<p><?php _e('Please enter your rss link.', 'rss-scroller'); ?> (url1)</p>
 			
 			<label for="tag-width"><?php _e('RSS URL 2', 'rss-scroller'); ?></label>
-			<input name="rss_scr_url2" type="text" value="<?php echo $rss_scr_url2; ?>"  id="rss_scr_url2" size="100" />
+			<input name="rss_scr_url2" type="text" value="<?php echo $rss_scr_url2; ?>"  id="rss_scr_url2" size="90" />
 			<p><?php _e('Please enter your rss link.', 'rss-scroller'); ?> (url2)</p>
 			
 			<label for="tag-width"><?php _e('RSS URL 3', 'rss-scroller'); ?></label>
-			<input name="rss_scr_url3" type="text" value="<?php echo $rss_scr_url3; ?>"  id="rss_scr_url3" size="100" />
+			<input name="rss_scr_url3" type="text" value="<?php echo $rss_scr_url3; ?>"  id="rss_scr_url3" size="90" />
 			<p><?php _e('Please enter your rss link', 'rss-scroller'); ?> (url3)</p>
 			
 			<input type="hidden" name="rss_scr_form_submit" value="yes"/>

@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Tags: horizontal, scrolling, rss
 Requires at least: 3.4
-Tested up to: 3.9
-Stable tag: 6.2
+Tested up to: 3.9.1
+Stable tag: 6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -29,7 +29,11 @@ Want to display the RSS feed with scroller then use this RSS scroller wordpress 
 *   Wonderful scroller effect.
 *   Linkable scroll.
 
-Check official website for live demo [http://www.gopiplus.com/work/2010/07/18/rss-scroller/](http://www.gopiplus.com/work/2010/07/18/rss-scroller/)
+**Plugin configuration option**
+
+*   Add the plugin in the posts or pages using short code.
+*   Add directly in to the theme using PHP code.
+*   Drag and drop the widget to your sidebar.
 
 == Installation ==
 
@@ -54,6 +58,10 @@ Check official website for live demo [http://www.gopiplus.com/work/2010/07/18/rs
 2. Admin Screen. http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 
 == Upgrade Notice ==
+
+= 6.3 =
+
+1. Little modification on fetch_feed() method call.
 
 = 6.2 =	 
 
@@ -98,6 +106,10 @@ Tested up to 3.0
 First version
 
 == Changelog ==
+
+= 6.3 =
+
+1. Little modification on fetch_feed() method call.
 
 = 6.2 =	 
 

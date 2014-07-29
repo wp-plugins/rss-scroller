@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rss scroller\n"
-"POT-Creation-Date: 2014-04-19 22:22+0800\n"
-"PO-Revision-Date: 2014-04-19 22:22+0800\n"
+"POT-Creation-Date: 2014-07-29 21:51+0800\n"
+"PO-Revision-Date: 2014-07-29 21:51+0800\n"
 "Last-Translator: \n"
 "Language-Team: www.gopiplus.com <www.gopiplus.com>\n"
 "MIME-Version: 1.0\n"
@@ -13,119 +13,120 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../rss-scroller.php:86 ../rss-scroller.php:179
+#: ../rss-scroller.php:83 ../rss-scroller.php:88 ../rss-scroller.php:184
+#: ../rss-scroller.php:189
 msgid "Invalid or Broken rss link."
 msgstr ""
 
-#: ../rss-scroller.php:210 ../rss-scroller.php:223 ../rss-scroller.php:330
-#: ../rss-scroller.php:334 ../rss-scroller.php:345
+#: ../rss-scroller.php:226 ../rss-scroller.php:239 ../rss-scroller.php:346
+#: ../rss-scroller.php:350 ../rss-scroller.php:361
 msgid "RSS scroller"
 msgstr ""
 
-#: ../rss-scroller.php:212 ../rss-scroller.php:320
+#: ../rss-scroller.php:228 ../rss-scroller.php:336
 msgid "Check official website for more information"
 msgstr ""
 
-#: ../rss-scroller.php:213 ../rss-scroller.php:321
+#: ../rss-scroller.php:229 ../rss-scroller.php:337
 msgid "click here"
 msgstr ""
 
-#: ../rss-scroller.php:262
+#: ../rss-scroller.php:278
 msgid "Details successfully updated."
 msgstr ""
 
-#: ../rss-scroller.php:268
+#: ../rss-scroller.php:284
 msgid "Plugin management"
 msgstr ""
 
-#: ../rss-scroller.php:270
+#: ../rss-scroller.php:286
 msgid "Title (For widget)"
 msgstr ""
 
-#: ../rss-scroller.php:272
+#: ../rss-scroller.php:288
 msgid "Please enter your widget title."
 msgstr ""
 
-#: ../rss-scroller.php:274
+#: ../rss-scroller.php:290
 msgid "Scroller speed"
 msgstr ""
 
-#: ../rss-scroller.php:276
+#: ../rss-scroller.php:292
 msgid "Please enter your scroller speed, this option only for widget."
 msgstr ""
 
-#: ../rss-scroller.php:278
+#: ../rss-scroller.php:294
 msgid "Scroller delay"
 msgstr ""
 
-#: ../rss-scroller.php:280
+#: ../rss-scroller.php:296
 msgid "Please enter your scroller delay, this option only for widget."
 msgstr ""
 
-#: ../rss-scroller.php:282
+#: ../rss-scroller.php:298
 msgid "Width"
 msgstr ""
 
-#: ../rss-scroller.php:284
+#: ../rss-scroller.php:300
 msgid "Please enter your width, this option only for widget."
 msgstr ""
 
-#: ../rss-scroller.php:286
+#: ../rss-scroller.php:302
 msgid "Height"
 msgstr ""
 
-#: ../rss-scroller.php:288
+#: ../rss-scroller.php:304
 msgid "Please enter your height, this option only for widget."
 msgstr ""
 
-#: ../rss-scroller.php:290
+#: ../rss-scroller.php:306
 msgid "No of items to display"
 msgstr ""
 
-#: ../rss-scroller.php:292
+#: ../rss-scroller.php:308
 msgid "Please enter number of items to display from rss feed."
 msgstr ""
 
-#: ../rss-scroller.php:294
+#: ../rss-scroller.php:310
 msgid "RSS URL 1 (This rss link is default for widget)."
 msgstr ""
 
-#: ../rss-scroller.php:296 ../rss-scroller.php:300
+#: ../rss-scroller.php:312 ../rss-scroller.php:316
 msgid "Please enter your rss link."
 msgstr ""
 
-#: ../rss-scroller.php:298
+#: ../rss-scroller.php:314
 msgid "RSS URL 2"
 msgstr ""
 
-#: ../rss-scroller.php:302
+#: ../rss-scroller.php:318
 msgid "RSS URL 3"
 msgstr ""
 
-#: ../rss-scroller.php:304
+#: ../rss-scroller.php:320
 msgid "Please enter your rss link"
 msgstr ""
 
-#: ../rss-scroller.php:308
+#: ../rss-scroller.php:324
 msgid "Submit"
 msgstr ""
 
-#: ../rss-scroller.php:309
+#: ../rss-scroller.php:325
 msgid "Help"
 msgstr ""
 
-#: ../rss-scroller.php:314
+#: ../rss-scroller.php:330
 msgid "Plugin configuration option"
 msgstr ""
 
-#: ../rss-scroller.php:316
+#: ../rss-scroller.php:332
 msgid "Add the plugin in the posts or pages using short code."
 msgstr ""
 
-#: ../rss-scroller.php:317
+#: ../rss-scroller.php:333
 msgid "Add directly in to the theme using PHP code."
 msgstr ""
 
-#: ../rss-scroller.php:318
+#: ../rss-scroller.php:334
 msgid "Drag and drop the widget to your sidebar."
 msgstr ""
