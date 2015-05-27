@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Tags: horizontal, scrolling, rss
 Requires at least: 3.4
-Tested up to: 4.1
-Stable tag: 6.5
+Tested up to: 4.2.2
+Stable tag: 6.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -58,6 +58,10 @@ Want to display the RSS feed with scroller then use this RSS scroller wordpress 
 2. Admin Screen. http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 
 == Upgrade Notice ==
+
+= 6.6 =	 
+
+1. Tested up to 4.2.2
 
 = 6.5 =	 
 
@@ -114,6 +118,10 @@ Tested up to 3.0
 First version
 
 == Changelog ==
+
+= 6.6 =	 
+
+1. Tested up to 4.2.2
 
 = 6.5 =	 
 
