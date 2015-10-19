@@ -3,11 +3,13 @@
 Plugin Name: RSS scroller
 Description: This plug-in will display RSS feed with simple scroller or ticker. It gradually reveals each item into view from left to right.
 Author: Gopi Ramasamy
-Version: 6.6
+Version: 6.8
 Plugin URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 Author URI: http://www.gopiplus.com/work/2010/07/18/rss-scroller/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: rss-scroller
+Domain Path: /languages
 */
 
 function rss_scr_show()
